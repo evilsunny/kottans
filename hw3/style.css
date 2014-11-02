@@ -1,0 +1,59 @@
+body {
+	background-color: #66FF99;
+	padding:20px;
+}
+
+h1,h2,h3{
+	text-align: center;
+	text-decoration: underline;
+}
+
+#about p::first-letter {
+    font-size: 40px;
+    color: orange;
+}
+
+a {
+    font-size: 18px;
+    color: firebrick;
+    padding: 5px;
+    margin: 0 5px;
+}
+
+nav a {
+    text-decoration: none;
+    font-size: 30px;
+    margin: 0 10px;
+    color: #2cb8a4;
+    padding: 10px;
+}
+
+nav a:hover {
+    background: #FFCCFF;
+}
+
+nav a:active {
+    color: #FFCCFF;
+}
+
+nav {
+    text-align: center;
+}
+
+#register, #feedback {
+    background :whitesmoke;
+    padding: 0 10px 10px 10px;
+    margin: 20px;
+    border-radius: 5px;
+}
+
+
+footer {
+    text-align: center;
+}
+
+#contacts:after {
+    content: "Let's love elephants together ";
+    font-weight: bold;
+}
+
