@@ -1,5 +1,6 @@
 $(document).ready(function() {
-
+    $('#errorLogin').hide();
+    $('#errorSignUp').hide();
     $('#signUpForm').on('submit',function (event) {
         event.preventDefault();
         var signUpForm = $('#signup');
@@ -17,6 +18,7 @@ $(document).ready(function() {
         var failureSignUp = function(err){
             console.log('ERROR!');
             console.log(err);
+            $('#errorSignUp').show("slow");
         }
         sendRequest(params,"SIGNUP", successSignUp,failureSignUp);
     });
@@ -31,11 +33,16 @@ $(document).ready(function() {
         var successLogin = function(data){
             console.log('SUCCESS!');
             console.log(data);
+            $('#login').hide();
+            $('#signup').hide();
+
         }
 
         var failureLogin = function(err){
             console.log('ERROR!');
             console.log(err);
+            $('#errorLogin').show("slow");
+
         }
         console.log(userId,userPassword);
         sendRequest(params,'LOGIN',successLogin,failureLogin);
