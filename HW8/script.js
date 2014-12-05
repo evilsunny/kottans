@@ -1,6 +1,16 @@
 $(document).ready(function() {
     $('#errorLogin').hide();
     $('#errorSignUp').hide();
+
+    if(token === undefined){
+        $('#list').hide();
+        $('#show-full').hide();
+    }else{
+        $('#login').hide();
+        $('#signup').hide();
+    }
+    var token;
+
     $('#signUpForm').on('submit',function (event) {
         event.preventDefault();
         var signUpForm = $('#signup');
@@ -13,6 +23,8 @@ $(document).ready(function() {
         var successSignUp = function(data){
             console.log('SUCCESS!');
             console.log(data);
+            $('#list').show("slow");
+            token = data["token"];
         }
 
         var failureSignUp = function(err){
@@ -35,6 +47,19 @@ $(document).ready(function() {
             console.log(data);
             $('#login').hide();
             $('#signup').hide();
+            $('#list').show("slow");
+            token = data["token"];
+            var successGetUsers = function(data){
+                console.log(data);
+                data.forEach(function(item){
+                    var  html = '<li><div class="person '+item.user.gender+' " id = " '+item["id"]+' " ><a class="url n" href="#show-full"><i>'+ item.user.name.title ;
+                    html += '</i> '+'  '+item.user.name.first +'  '+ item.user.name.last+'</a> </div> </li>';
+                    $("#usersList").append(html);
+                })
+
+
+            }
+            sendRequest(token,"GETUSERS",successGetUsers,null);
 
         }
 
@@ -53,7 +78,7 @@ $(document).ready(function() {
     function sendRequest(params,requestType,success,failure) {
         var requestData;
         var requestAddress;
-
+        var TYPE;
         switch (requestType){
             case "LOGIN":
                 requestData = {
@@ -61,6 +86,7 @@ $(document).ready(function() {
                     password:params[1]
                 }
                 requestAddress = 'login';
+                TYPE="POST";
                 break;
             case "SIGNUP":
                 requestData = {
@@ -69,12 +95,28 @@ $(document).ready(function() {
                     passwordConfirmation:params[2]
                 }
                 requestAddress = 'signup';
+                TYPE="POST";
+                break;
+            case "GETUSERS":
+                TYPE = "GET";
+                requestAddress = "users"
                 break;
         }
 
-        $.post("http://api.sudodoki.name:8888/"+requestAddress, {
-            data: requestData
-        }).done(success).error(failure);
+        if(TYPE === "POST") {
+            $.post(
+                "http://api.sudodoki.name:8888/" + requestAddress,
+                {
+                data: requestData
+                }).
+                done(success).error(failure);
+        }else{
+            $.get(
+                "http://api.sudodoki.name:8888/" + requestAddress,
+                {},
+                success
+            );
+        }
     }
 
 
