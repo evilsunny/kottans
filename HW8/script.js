@@ -1,14 +1,9 @@
 $(document).ready(function() {
     $('#errorLogin').hide();
     $('#errorSignUp').hide();
+    $('#show-full').hide();
 
-    if(token === undefined){
-        $('#list').hide();
-        $('#show-full').hide();
-    }else{
-        $('#login').hide();
-        $('#signup').hide();
-    }
+
     var token;
 
     $('#signUpForm').on('submit',function (event) {
@@ -55,8 +50,14 @@ $(document).ready(function() {
                     var  html = '<li><div class="person '+item.user.gender+' " id = " '+item["id"]+' " ><a class="url n" href="#show-full"><i>'+ item.user.name.title ;
                     html += '</i> '+'  '+item.user.name.first +'  '+ item.user.name.last+'</a> </div> </li>';
                     $("#usersList").append(html);
-                })
 
+                    $("#"+item.id).on('click',function(){
+                        var successGetUser = function(data){
+                            console.log(data);
+                        }
+                        sendRequest(token,"GETUSER",successGetUser,null);
+                    });
+                })
 
             }
             sendRequest(token,"GETUSERS",successGetUsers,null);
@@ -101,6 +102,9 @@ $(document).ready(function() {
                 TYPE = "GET";
                 requestAddress = "users"
                 break;
+            case "GETUSER":
+                TYPE = "GET";
+                requestAddress  = "user/"+ params[0]
         }
 
         if(TYPE === "POST") {
@@ -111,11 +115,18 @@ $(document).ready(function() {
                 }).
                 done(success).error(failure);
         }else{
+            if(TYPE === "GETUSERS"){
             $.get(
                 "http://api.sudodoki.name:8888/" + requestAddress,
                 {},
                 success
             );
+        }else{
+                $.ajax({
+                    type:"GET",
+                    url : "http://api.sudodoki.name:8888/" + requestAddress ,
+                    headers: {"SECRET-TOKEN":params[1]};
+            }
         }
     }
 
