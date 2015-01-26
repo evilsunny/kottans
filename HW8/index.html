@@ -14,10 +14,6 @@
 
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="foundation.css">
-
-
-
-
 </head>
   <body>
   
@@ -41,12 +37,12 @@
         <div class="row">
           <div class="column small-offset-1 small-10 large-offset-2 large-8">
             <h1>Login</h1>
-            <form class="small-8" id="loginForm">
+            <form method="post" action="http://localhost:8888/login" class="small-8">
               <input class="error" name="login" type="text" placeholder="enter your login">
-              <small class="error" id = "errorLogin">Something went wrong!</small>
+              <small class="error">Something went wrong!</small>
               <input name="password" type="password" placeholder="enter your password">
               <input type="submit" value="Log me in" class="button">
-              <a href="#signup" class="button secondary">Sign me up</a>
+              <a href="/signup" class="button secondary">Sign me up</a>
             </form>
           </div>
         </div>
@@ -56,9 +52,9 @@
       <div class="row">
         <div class="column small-offset-1 small-10 large-offset-2 large-8">
           <h1>Signup</h1>
-          <form class="small-8" id="signUpForm">
-              <input class="error" name="login" type="text" placeholder="enter your login">
-            <small class="error" id = "errorSignUp">Something went wrong!</small>
+          <form method="post" action="http://localhost:8888/signup" class="small-8">
+            <input class="error" name="login" type="text" placeholder="enter your login">
+            <small class="error">Something went wrong!</small>
             <input name="email" type="email" placeholder="enter your email">
             <input name="password" type="password" placeholder="enter your new password">
             <input name="passwordConfirmation" type="password" placeholder="retype it">
@@ -70,8 +66,22 @@
     </div>
     <hr>
     <div id="list">
-      <ul class="small-block-grid-3" id = "usersList">
-
+      <ul class="small-block-grid-3">
+      <li>
+        <div class="person male">
+          <a class='url n' href="#show-full"><i>Mr.</i> Know-it-all, I</a>
+        </div>
+      </li>
+      <li>
+        <div class="person female">
+          <a class='url n' href="#show-full"><i>Mrs.</i> Did-it, Been-there</a>
+        </div>
+      </li>
+      <li>
+        <div class="person male">
+          <a class='url n' href="#show-full"><i>Mr.</i> Real Fun.</a>
+        </div>
+      </li>
       </ul>
     </div>
     <hr>
@@ -93,9 +103,7 @@
       </div>
     </div>
     <!--[if lt IE 7]><script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script><script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script><![endif]-->
-  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-  <script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.js"></script>
-  <script src="script.js" type="text/javascript"></script>
+   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   </body>
 </html>
 
